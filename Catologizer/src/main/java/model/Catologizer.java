@@ -43,9 +43,9 @@ public class Catologizer {
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         //ВВод из командной строки
-        //String path = args[0];
+        String path = args[0];
 
-        String path = "d:\\MUSIC\\2017";
+        //String path = "d:\\MUSIC\\2017";
         ArrayList<Artist> artists = new ArrayList<Artist>();// хранение всех артистов
         Artist newArtist;
         Album newAlbum;
