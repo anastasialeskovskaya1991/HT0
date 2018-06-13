@@ -43,11 +43,11 @@ public class Catologizer {
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         //ВВод из командной строки
-        String path;
-        if (args[0]!= null) {
+        String path = null;
+        try {
             path = args[0];
-        } else {
-            System.out.println("Enter correct filepath:");
+        } catch (Exception e) {
+            System.out.println("Enter correct filepath");
             System.exit(0);
         }
 
