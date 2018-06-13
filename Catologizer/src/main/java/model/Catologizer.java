@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
@@ -19,27 +21,6 @@ public class Catologizer {
     /**
      * @param args
      */
-//
-//
-//    private static void getDublicatesList(ArrayList<String> data) {
-//        Set<String> founderStrings = new HashSet<String>();
-//        Set<String> dublicates = new HashSet<String>();
-//
-//        // ArrayList <DublicatList> dublicatLists = new D
-//
-//        for (String str : data) {
-//            if (founderStrings.contains(str)) {
-//                dublicates.add(str);
-//            } else {
-//                founderStrings.add(str);
-//            }
-//        }
-//        System.out.println(dublicates);
-//        System.out.println("size dubl :" + dublicates.size());
-//
-//
-//    }
-
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         //ВВод из командной строки
@@ -51,7 +32,7 @@ public class Catologizer {
             System.exit(0);
         }
 
-//        path = "d:\\MUSIC\\2017";
+//        path = "d:\\MUSIC\\2016";
         ArrayList<Artist> artists = new ArrayList<Artist>();// хранение всех артистов
         Artist newArtist;
         Album newAlbum;
@@ -77,18 +58,21 @@ public class Catologizer {
         ArrayList<File> listOfFiles = fileHelper.getFiles();// получаем список файлов с расширением mp3//
 
 
+        ArrayList<File> duplicates = new ArrayList<>();
+
+
         for (File file : listOfFiles) {
             String fileLocation = file.toString();
             System.out.println("fL : "+ fileLocation);
 
             try {
                 InputStream input = new FileInputStream(new File(fileLocation));
-//                  Получение контрольной суммы
+
                 md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(input);
-                if (checkSum.containsKey(md5)){
+                if (checkSum.containsKey(md5)) {
                     checkSum.get(md5).add(fileLocation);
                     // controlSum.put(md5,controlSum.get(md5).add(fileLocation))
-                } else{
+                } else {
                     checkSum.put(md5, new ArrayList<String>());
                     checkSum.get(md5).add(fileLocation);
                 }
@@ -118,6 +102,15 @@ public class Catologizer {
                             if (album.getName().equals(newAlbum.getName())) {
                                 System.out.println("equals = true");
                                 albumExist = true;
+                                for (Song song: album.getSongs()) {
+                                    System.out.println("Compare song:" + song.getName() + " . with song:" + newSong.getName() + ".");
+                                    if (song.getName().equals(newSong.getName())) {
+                                        System.out.println("equals = true");
+                                        duplicates.add(file);
+                                        duplicates.add(new File(song.getPath()));
+                                        break;
+                                    }
+                                }
                                 album.addSongs(newSong);
                                 break;
                             }
@@ -165,6 +158,13 @@ public class Catologizer {
         writer.write(lineFirtht +lineEnd);
         writer.flush();
         writer.close();
+
+
+//        for(File file: duplicates) {
+//            System.out.println(file);
+//        }
+// TODO: complete logger
+//        Logger logger = LogManager.getRootLogger();
         System.out.println(checkSum);
     }
 }
