@@ -3,19 +3,19 @@ package model;
 import java.util.ArrayList;
 
 public class Album {
-    private String nameAlbum = "неизвестный";
+    private String name;
     private ArrayList<Song> songs = new ArrayList<Song>();
 
     public Album(String name) {
-        this.nameAlbum = name;
-        }
-
-    public String getNameAlbum() {
-        return nameAlbum;
+        this.name = (name == null) ? "N/A" : name;
     }
 
-    public void setNameAlbum(String nameAlbum) {
-        this.nameAlbum = nameAlbum;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Song> getSongs() {
@@ -26,14 +26,16 @@ public class Album {
         this.songs = songs;
     }
 
-    public  void addSongs(Song  song){
+
+    public void addSongs(Song song){
         songs.add(song);
-        }
+        System.out.println("Added new song:" + song.getName() + " to album:" + this.name);
+    }
 
     @Override
     public String toString() {
         return "Album{" +
-                "nameAlbum='" + nameAlbum + '\'' +
+                "name='" + name + '\'' +
                 ", songs=" + songs +
                 '}';
     }

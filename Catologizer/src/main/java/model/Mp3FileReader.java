@@ -42,7 +42,7 @@ public class Mp3FileReader {
             if (entry.toString().endsWith(suffix)) {
 
                 files.add(entry);
-                System.out.println(" parse : "+ entry);
+                //System.out.println(" parse : "+ entry);
                 //files.add(entry);
             }
         }

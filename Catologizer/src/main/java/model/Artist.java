@@ -7,7 +7,7 @@ public class Artist {
     private ArrayList<Album> albums = new ArrayList<Album>();
 
     public Artist(String name) {
-        this.name = name;
+        this.name = (name == null) ? "N/A" : name;
     }
 
     public Artist(ArrayList<Album> albums) {
@@ -28,6 +28,7 @@ public class Artist {
 
     public void addAlbum(Album album) {
         albums.add(album);
+        System.out.println("Added new album:" + album.getName() + " to artist:" + this.name );
     }
 
     @Override

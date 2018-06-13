@@ -1,15 +1,13 @@
 package model;
 
-import java.util.concurrent.TimeUnit;
-
 public class Song {
 
-    private String nameSong;
+    private String name;
     private String time;
     private String path;
 
-    public Song(String nameSong, String time, String path) {
-        this.nameSong = nameSong;
+    public Song(String name, String time, String path) {
+        this.name = (name == null) ? "N/A" : name;
 //        double tempTime = Double.parseDouble(time);
 //        int result = ((int)tempTime  % 3600) / 60;
   //      String.valueOf(result);
@@ -17,12 +15,12 @@ public class Song {
         this.path = path;
     }
 
-    public String getNameSong() {
-        return nameSong;
+    public String getName() {
+        return name;
     }
 
-    public void setNameSong(String nameSong) {
-        this.nameSong = nameSong;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTime() {
@@ -43,7 +41,7 @@ public class Song {
     @Override
     public String toString() {
         return "Song{" +
-                "nameSong='" + nameSong + '\'' +
+                "name='" + name + '\'' +
                 ", time='" + time + '\'' +
                 ", path='" + path + '\'' +
                 '}';
