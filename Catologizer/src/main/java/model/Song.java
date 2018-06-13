@@ -10,7 +10,7 @@ public class Song {
         this.name = (name == null) ? "N/A" : name;
 //        double tempTime = Double.parseDouble(time);
 //        int result = ((int)tempTime  % 3600) / 60;
-  //      String.valueOf(result);
+        //      String.valueOf(result);
         this.time = time;
         this.path = path;
     }
@@ -24,7 +24,15 @@ public class Song {
     }
 
     public String getTime() {
-        return time;
+        try {
+            int timeInMillis = (int) Double.parseDouble(time);
+            int timeInSec = timeInMillis / 1000;
+            int mins = timeInSec / 60;
+            int secs = timeInSec % 60;
+            return mins + ":" + secs;
+        } catch (Exception e) {
+            return time;
+        }
     }
 
     public void setTime(String time) {
